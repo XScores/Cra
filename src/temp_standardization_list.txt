@@ -1,0 +1,46 @@
+Screens needing HamburgerMenu standardization:
+
+Batch 1 - FHSA/TFSA Info Screens:
+1. HowToOpenFHSAScreen
+2. FHSAvsHBPScreen  
+3. ViewTFSAContributionRoomScreen
+4. CorrectTFSAOverContributionScreen
+5. TFSAInvestorsInfoScreen
+6. RequestWaiveTFSATaxScreen
+7. FHSAQualifyingWithdrawalScreen
+8. ViewFHSAContributionRoomScreen
+
+Batch 2 - RESP Info Screens:
+9. RESPGrantProgramsScreen
+10. HowToOpenRESPScreen
+11. RESPWithdrawalRulesScreen
+12. ApplyCanadaLearningBondScreen
+13. ProvincialEducationSavingsScreen
+
+Batch 3 - FAQ Screens:
+14. FAQFileTaxesScreen
+15. FAQRefundScreen
+16. FAQMakePaymentScreen
+17. FAQUpdateAddressScreen
+18. FAQNoticeOfAssessmentScreen
+19. FAQ UpdateAddressScreen (with space)
+
+Batch 4 - Communication Screens:
+20. LiveChatScreen
+21. SentMessagesScreen
+22. ArchiveScreen
+
+Batch 5 - Payment/Profile Screens:
+23. SimplifiedMakePaymentScreen
+24. CreditCardConfirmPaymentScreen
+25. CreditCardPaymentSuccessScreen
+26. ManageCardsScreen
+27. MorePaymentInfoScreen
+
+Batch 6 - Help/Settings Screens:
+28. CallSchedulingScreen
+29. SpouseDetailsScreen
+30. ChildDetailsScreen
+31. AppVersionScreen
+32. BalanceOwingDetailsScreen
+33. RefundDetailsScreen
