@@ -52,11 +52,30 @@ interface DashboardScreenProps {
   onHomeBuyersPlan?: () => void;
   onFHSAEligibility?: () => void;
   onLifelongLearningPlan?: () => void;
+  lastLoginTime?: Date | null;
 }
 
-export function DashboardScreen({ onMakePayment, onFileTaxes, onViewNoticeOfAssessment, onViewMail, onRegisteredPlans, onNavigateHome, onLogoClick, hasUnreadMail, onViewBalanceOwingDetails, onViewRefundDetails, onViewAllBenefits, onHelp, onSignOut, onTaxSlips, onProofOfIncome, onBecomeRepresentative, onBecomeRepresentativeAsRep, onCustomize, onUncashedCheques, onRemittanceVoucher, onCPPEIRuling, onAuditEnquiries, onCarryoverAmounts, onChangeMyReturn, onRegisterFormalDispute, onNonResidentAccount, onResidencyDetermination, onPersonalIdentificationNumber, onProgressTrackerService, onReliefOfPenalties, onSubmitDocuments, onUserFeedback, customMostRequested, customNumberOfRows, customMenuItems, onSwapMostRequested, onGSTHSTCredit, onAccountDetails, onProfile, onViewTaxReturns, onHomeBuyersPlan, onFHSAEligibility, onLifelongLearningPlan }: DashboardScreenProps) {
+export function DashboardScreen({ onMakePayment, onFileTaxes, onViewNoticeOfAssessment, onViewMail, onRegisteredPlans, onNavigateHome, onLogoClick, hasUnreadMail, onViewBalanceOwingDetails, onViewRefundDetails, onViewAllBenefits, onHelp, onSignOut, onTaxSlips, onProofOfIncome, onBecomeRepresentative, onBecomeRepresentativeAsRep, onCustomize, onUncashedCheques, onRemittanceVoucher, onCPPEIRuling, onAuditEnquiries, onCarryoverAmounts, onChangeMyReturn, onRegisterFormalDispute, onNonResidentAccount, onResidencyDetermination, onPersonalIdentificationNumber, onProgressTrackerService, onReliefOfPenalties, onSubmitDocuments, onUserFeedback, customMostRequested, customNumberOfRows, customMenuItems, onSwapMostRequested, onGSTHSTCredit, onAccountDetails, onProfile, onViewTaxReturns, onHomeBuyersPlan, onFHSAEligibility, onLifelongLearningPlan, lastLoginTime }: DashboardScreenProps) {
   const currentHour = new Date().getHours();
   const greeting = currentHour < 12 ? 'Good morning' : currentHour < 18 ? 'Good afternoon' : 'Good evening';
+
+  const formatLastLogin = (date: Date | null) => {
+    if (!date) return 'October 9, 2025 at 2:30 PM';
+    
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const month = months[date.getMonth()];
+    const day = date.getDate();
+    const year = date.getFullYear();
+    
+    let hours = date.getHours();
+    const minutes = date.getMinutes();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    const minutesStr = minutes < 10 ? '0' + minutes : minutes;
+    
+    return `${month} ${day}, ${year} at ${hours}:${minutesStr} ${ampm}`;
+  };
 
   return (
     <div className="h-full bg-[#f2f2f7] flex flex-col relative">
@@ -117,7 +136,7 @@ export function DashboardScreen({ onMakePayment, onFileTaxes, onViewNoticeOfAsse
         <div className="px-4 py-4 bg-[#f2f2f7]">
           <div className="py-4 pr-4">
             <h2 className="text-[20px] font-semibold text-black m-0 mb-1">{greeting}, Jonathan</h2>
-            <p className="text-gray-ios text-[15px] m-0">Last login: October 9, 2025 at 2:30 PM</p>
+            <p className="text-gray-ios text-[15px] m-0">Last login: {formatLastLogin(lastLoginTime)}</p>
           </div>
         </div>
 

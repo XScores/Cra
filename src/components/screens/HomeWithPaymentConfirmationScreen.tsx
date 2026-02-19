@@ -28,6 +28,7 @@ interface HomeWithPaymentConfirmationScreenProps {
   onFHSAEligibility?: () => void;
   onBecomeRepresentative?: () => void;
   onBecomeRepresentativeAsRep?: () => void;
+  lastLoginTime?: Date | null;
 }
 
 export function HomeWithPaymentConfirmationScreen({ 
@@ -50,7 +51,8 @@ export function HomeWithPaymentConfirmationScreen({
   onHomeBuyersPlan,
   onFHSAEligibility,
   onBecomeRepresentative,
-  onBecomeRepresentativeAsRep
+  onBecomeRepresentativeAsRep,
+  lastLoginTime
 }: HomeWithPaymentConfirmationScreenProps) {
   const [showMenu, setShowMenu] = useState(false);
   
@@ -75,6 +77,24 @@ export function HomeWithPaymentConfirmationScreen({
     const [year, month, day] = dateString.split('-').map(Number);
     const date = new Date(year, month - 1, day);
     return date.toLocaleDateString('en-CA', { year: 'numeric', month: 'short', day: 'numeric' });
+  };
+
+  const formatLastLogin = (date: Date | null) => {
+    if (!date) return 'October 9, 2025 at 2:30 PM';
+    
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const month = months[date.getMonth()];
+    const day = date.getDate();
+    const year = date.getFullYear();
+    
+    let hours = date.getHours();
+    const minutes = date.getMinutes();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    const minutesStr = minutes < 10 ? '0' + minutes : minutes;
+    
+    return `${month} ${day}, ${year} at ${hours}:${minutesStr} ${ampm}`;
   };
 
   return (
@@ -112,7 +132,7 @@ export function HomeWithPaymentConfirmationScreen({
         {/* Greeting */}
         <div className="px-4 pt-4 pb-3 bg-[#f2f2f7]">
           <h2 className="text-[22px] font-semibold text-black m-0 mb-1">{greeting}, Jonathan</h2>
-          <p className="text-black text-[15px] m-0 opacity-80">Last login: October 9, 2025 at 2:30 PM</p>
+          <p className="text-black text-[15px] m-0 opacity-80">Last login: {lastLoginTime ? formatLastLogin(lastLoginTime) : 'Not available'}</p>
         </div>
 
         {/* Quick Links */}

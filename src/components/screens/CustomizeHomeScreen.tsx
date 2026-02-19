@@ -1076,7 +1076,31 @@ export function CustomizeHomeScreen({
             <div className="grid grid-cols-4 gap-2.5">
               {allActions.map((action, index) => {
                 const isSelected = mostRequested.some((mr) => mr.id === action.id && mr.id !== '');
-                const isInBottomNav = bottomNavItems.some((navItem) => navItem.label === action.label);
+                const isInBottomNav = bottomNavItems.some((navItem) => {
+                  // Normalize labels by removing newlines and extra spaces for comparison
+                  const normalizeLabel = (label: string) => label.replace(/\\n/g, ' ').replace(/\n/g, ' ').trim().toLowerCase();
+                  
+                  // First check if labels match (this handles swapped items)
+                  if (normalizeLabel(navItem.label) === normalizeLabel(action.label)) {
+                    return true;
+                  }
+                  
+                  // For default bottom nav items, check icon match with specific IDs
+                  // to avoid false positives from reused icons
+                  const defaultBottomNavIds = ['home', 'returns', 'payments', 'profile'];
+                  if (defaultBottomNavIds.includes(navItem.id)) {
+                    // Map default bottom nav IDs to their corresponding action IDs
+                    const idMap: { [key: string]: string } = {
+                      'home': 'family-info',
+                      'returns': 'tax-returns',
+                      'payments': 'payments',
+                      'profile': 'faq'
+                    };
+                    return action.id === idMap[navItem.id];
+                  }
+                  
+                  return false;
+                });
                 return (
                   <DraggableItem 
                     key={action.id} 
